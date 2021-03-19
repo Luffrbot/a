@@ -28,6 +28,74 @@ const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 prefix = '.'
 blocked = []
 
+const getLevelingXp = (userId) => {
+            let position = false
+            Object.keys(_level).forEach((i) => {
+                if (_level[i].jid === userId) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return _level[position].xp
+            }
+        }
+
+        const getLevelingLevel = (userId) => {
+            let position = false
+            Object.keys(_level).forEach((i) => {
+                if (_level[i].jid === userId) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return _level[position].level
+            }
+        }
+
+        const getLevelingId = (userId) => {
+            let position = false
+            Object.keys(_level).forEach((i) => {
+                if (_level[i].jid === userId) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return _level[position].jid
+            }
+        }
+
+        const addLevelingXp = (userId, amount) => {
+            let position = false
+            Object.keys(_level).forEach((i) => {
+                if (_level[i].jid === userId) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                _level[position].xp += amount
+                fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
+            }
+        }
+
+        const addLevelingLevel = (userId, amount) => {
+            let position = false
+            Object.keys(_level).forEach((i) => {
+                if (_level[i].jid === userId) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                _level[position].level += amount
+                fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
+            }
+        }
+
+        const addLevelingId = (userId) => {
+            const obj = {jid: userId, xp: 1, level: 1}
+            _level.push(obj)
+            fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
+        }
+
 function kyun(seconds){
   function pad(s){
     return (s < 10 ? '0' : '') + s;
@@ -65,22 +133,17 @@ async function starts() {
 			console.log(anu)
 			if (anu.action == 'add') {
 				num = anu.participants[0]
-				try {
-					ppimg = await client.getProfilePicture(`${anu.participants[0].split('@')[0]}@c.us`)
-				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-				}
-				teks = `Olá @${num.split('@')[0]}\nBem vindo ao grupo *${mdata.subject}*\nPor favor não seja um ghost❤️`
+				teks = `Olá
+
+@${num.split('@')[0]}\nBem vindo/a ao grupo *${mdata.subject}*\nPor favor não seja um ghost❤️
+
+Leia as regras e nos fale qual seu nome/idade/triade =)`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			} else if (anu.action == 'remove') {
 				num = anu.participants[0]
-				try {
-					ppimg = await client.getProfilePicture(`${num.split('@')[0]}@c.us`)
-				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-				}
-				teks = `Tchau @${num.split('@')[0]} ja foi tarde 😂👋`
+			
+				teks = `Ala O random saiukkkkkkkkkkkk 
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			}
@@ -134,7 +197,7 @@ async function starts() {
 			}
 
 			const botNumber = client.user.jid
-			const ownerNumber = ["5517991134416@s.whatsapp.net"] // replace this with your number
+			const ownerNumber = ["5511910622412@s.whatsapp.net"] // replace this with your number
 			const isGroup = from.endsWith('@g.us')
 			const sender = isGroup ? mek.participant : mek.key.remoteJid
 			const groupMetadata = isGroup ? await client.groupMetadata(from) : ''
