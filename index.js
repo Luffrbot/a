@@ -108,6 +108,10 @@ function kyun(seconds){
   return `${pad(hours)} Hora ${pad(minutes)} Minuto ${pad(seconds)} Segundo`
 }
 
+const user = JSON.parse(fs.readFileSync('./database/json/user.json'))
+const _leveling = JSON.parse(fs.readFileSync('./database/json/leveling.json'))
+const _level = JSON.parse(fs.readFileSync('./database/json/level.json'))
+
 async function starts() {
 	const client = new WAConnection()
 	client.logger.level = 'warn'
