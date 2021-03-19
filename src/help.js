@@ -2,7 +2,8 @@ const help = (prefix) => {
 	return `
 
 ╔════════════════════
-║        🌹𝐙𝐄𝐔𝐒 𝐁𝐎𝐓 🌹
+║        BOTZINHO DO 
+       WA.me/5511910622412🌹
 ╠════════════════════
 
 
@@ -70,7 +71,7 @@ const help = (prefix) => {
        • ─── ✾ ─── •
        *GRUPO*【✔】
        • ─── ✾ ─── •
-      
+➸ Level : *${prefix}level*    
 ➸ Comando : *${prefix}linkgroup*
 ➸ útil em : enviar o link do grupo
 ➸ uso : basta enviar o comando\n
@@ -108,9 +109,7 @@ const help = (prefix) => {
     
 
 ╔════════════════════
-  FEITO POR *ZEUS*
-  DUVIDAS? 👇
-  WA.me/556993899391
+
 ╚════════════════════`
 }
 
